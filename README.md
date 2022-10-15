@@ -1,2 +1,0 @@
-# sandbox-pipeline
-Sample pipeline
