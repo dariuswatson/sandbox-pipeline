@@ -3,27 +3,44 @@ name: main_registry
 on:
   push:
     branches:
-      - 'main'
+      - 'logic_test'
 
 jobs:
-  build:
+  node:
+    strategy:
+      matrix:
+        env: [dev, stage, prod]
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Login to GHCR (github container registry)
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      -
-        name: Build and push to ghcr.io
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ghcr.io/dariuswatson/simplewhale:v1.0.1
+      - name: Set pipeline vars
+        run: |
+          echo "ECR_REGISTRY=753564379118.dkr.ecr.us-east-1.amazonaws.com" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY=tilt_node_${{ matrix.env }}" >> $GITHUB_ENV
+          echo "EKS_CLUSTER=tilt-${{ matrix.env }}" >> $GITHUB_ENV
+          echo "NAMESPACE_NAME=${{ matrix.env }}" >> $GITHUB_ENV
+          echo "ECR_SHA_TAG=${{ github.sha }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_API_PROTOCOL=https" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_JS_API_URL=ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
+          echo "NEXT_PUBLIC_ADMIN_SUBDOMAIN=admin" >> $GITHUB_ENV
+          if [[ "${{ matrix.env }}" == "stage" ]]
+          then
+            echo "found stage"
+          else
+            echo "nope"
+          fi
+
+
+      - name: Check runtime vars
+        run: |
+          echo "Registry = $ECR_REGISTRY"
+          echo "Image repo = $ECR_REPOSITORY"
+          echo "SHA = $ECR_SHA_TAG"
+          echo "Version = $EKS_CLUSTER"
+          echo "Environment = $NAMESPACE_NAME"
+          echo "SHA = $ECR_SHA_TAG"
+          echo "NEXT_PUBLIC_API_PROTOCOL = $NEXT_PUBLIC_API_PROTOCOL"
+          echo "NEXT_PUBLIC_JS_API_URL = $NEXT_PUBLIC_JS_API_URL"
+          echo "NEXT_PUBLIC_DJANGO_API_URL = $NEXT_PUBLIC_DJANGO_API_URL"
+          echo "NEXT_PUBLIC_ADMIN_SUBDOMAIN = $NEXT_PUBLIC_ADMIN_SUBDOMAIN"
