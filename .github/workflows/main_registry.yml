@@ -17,24 +17,28 @@ jobs:
         run: |
           echo "ECR_REGISTRY=753564379118.dkr.ecr.us-east-1.amazonaws.com" >> $GITHUB_ENV
           echo "ECR_REPOSITORY=tilt_node_${{ matrix.env }}" >> $GITHUB_ENV
-          echo "EKS_CLUSTER=tilt-${{ matrix.env }}" >> $GITHUB_ENV
           echo "NAMESPACE_NAME=${{ matrix.env }}" >> $GITHUB_ENV
           echo "ECR_SHA_TAG=${{ github.sha }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_API_PROTOCOL=https" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_JS_API_URL=ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_ADMIN_SUBDOMAIN=admin" >> $GITHUB_ENV
           if [[ "${{ matrix.env }}" == "dev" ]]
           then
             echo "found dev"
+            echo "EKS_CLUSTER=tilt-k8s-dev" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_JS_API_URL=ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
           elif [[ "${{ matrix.env }}" == "stage" ]]
           then
             echo "found stage" 
+            echo "EKS_CLUSTER=tilt-k8s-stage" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_JS_API_URL=ourtilt.net" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.net" >> $GITHUB_ENV
           elif [[ "${{ matrix.env }}" == "prod" ]]
           then 
             echo "found prod"
-          else
-            echo "no environment found"
+            echo "EKS_CLUSTER=tilt-k8s-prod" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_JS_API_URL=ourtilt.com" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.com" >> $GITHUB_ENV
           fi
 
       - name: Check runtime vars
