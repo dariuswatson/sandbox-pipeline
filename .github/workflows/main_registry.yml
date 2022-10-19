@@ -24,13 +24,13 @@ jobs:
           echo "NEXT_PUBLIC_JS_API_URL=ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_ADMIN_SUBDOMAIN=admin" >> $GITHUB_ENV
-          if [[ "$matrix_env" == "dev" ]]
+          if [[ "${{ matrix.env }}" == "dev" ]]
           then
             echo "found dev"
-          elif [[ "$matrix_env" == "stage" ]]
+          elif [[ "${{ matrix.env }}" == "stage" ]]
           then
             echo "found stage" 
-          elif [[ "$matrix_env" == "prod" ]]
+          elif [[ "${{ matrix.env }}" == "prod" ]]
           then 
             echo "found prod"
           else
