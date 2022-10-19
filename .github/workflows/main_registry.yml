@@ -24,13 +24,18 @@ jobs:
           echo "NEXT_PUBLIC_JS_API_URL=ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_DJANGO_API_URL=api.ourtilt.${{ matrix.env }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_ADMIN_SUBDOMAIN=admin" >> $GITHUB_ENV
-          if [[ "${{ matrix.env }}" == "stage" ]]
+          if [[ "$matrix_env" == "dev" ]]
           then
-            echo "found stage"
+            echo "found dev"
+          elif [[ "$matrix_env" == "stage" ]]
+          then
+            echo "found stage" 
+          elif [[ "$matrix_env" == "prod" ]]
+          then 
+            echo "found prod"
           else
-            echo "nope"
+            echo "no environment found"
           fi
-
 
       - name: Check runtime vars
         run: |
