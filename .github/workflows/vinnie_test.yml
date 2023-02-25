@@ -21,7 +21,6 @@ jobs:
 
       - name: Tag with Vinnie
         run: |
-          # Setup git user
           git config --global user.email "actions@sample.com"
           git config --global user.name "Sample Github Actions"
           pip install vinnie
