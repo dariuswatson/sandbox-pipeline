@@ -26,7 +26,8 @@ jobs:
           pip install vinnie
           vinnie show-config
           #vinnie --semver --prefix=v major
-          vinnie --semver --prefix=v minor
+          #vinnie --semver --prefix=v minor
+          vinnie --semver --prefix=v patch
           git push --tags
 
       - name: Test
