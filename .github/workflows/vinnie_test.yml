@@ -1,0 +1,41 @@
+name: publish-build
+
+on:
+  push:
+    branches:
+      - vinnie
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  tag:
+    name: Determine next Docker Image tag with Vinnie
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Tag with Vinnie
+        run: |
+          # Setup git user
+          git config --global user.email "actions@sample.com"
+          git config --global user.name "Sample Github Actions"
+          pip install vinnie
+          # Get next version and pass along in the environment
+          vinnie --no-semver --prefix=v next bump > vinnie.txt
+          export VINNIE_VERSION=`cat vinnie.txt`
+          echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
+          git tag $VINNIE_VERSION
+          git push --tags
+          find . -name 'vinnie.txt'
+
+      - name: Upload vinnie version artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: vinnie_version
+          path: vinnie.txt
+
