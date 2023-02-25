@@ -28,4 +28,7 @@ jobs:
           vinnie --semver --prefix=v major
           git push --tags
 
-
+      - name: Test
+        run: |
+          hostname
+          date
