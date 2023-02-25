@@ -24,9 +24,11 @@ jobs:
           git config --global user.email "actions@sample.com"
           git config --global user.name "Sample Github Actions"
           pip install vinnie
-          vinnie version > vinnie.txt
+          vinnie show-config
+          vinnie minor > vinnie.txt
           export VINNIE_VERSION=`cat vinnie.txt`
-          git tag $VINNIE_VERSION
-          git push --tags
+          echo "This version: $VINNIE_VERSION"
+          #git tag $VINNIE_VERSION
+          #git push --tags
 
 
