@@ -26,6 +26,7 @@ jobs:
           pip install vinnie
           # vinnie --no-semver --prefix=v next bump > vinnie.txt
           vinnie version
+          vinnie --prefix=v version
           vinnie patch
           export VINNIE_VERSION=`cat vinnie.txt`
           echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
