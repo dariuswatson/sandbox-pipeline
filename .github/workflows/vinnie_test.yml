@@ -32,6 +32,7 @@ jobs:
 
       - name: Test
         run: |
+          vinnie show-config
           vinnie version > vinnie.txt
           export VINNIE_VERSION=`cat vinnie.txt`
           echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
