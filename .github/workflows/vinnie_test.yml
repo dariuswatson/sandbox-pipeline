@@ -26,7 +26,6 @@ jobs:
           pip install vinnie
           vinnie show-config
 
-
       - name: vinnie --semver --prefix=v (major/minor/patch)
         run: |
           vinnie show-config
@@ -35,9 +34,14 @@ jobs:
           #vinnie --semver --prefix=v patch
           #git push --tags
 
-      - name: vinnie --semver --prefix=v next (major/minor/patch)
+      - name: vinnie --semver --prefix=v next (major)
         run: |
-          vinnie show-config
-          #vinnie --semver --prefix=v next major
-          #vinnie --semver --prefix=v next minor
+          vinnie --semver --prefix=v next major
+
+      - name: vinnie --semver --prefix=v next (minor)
+        run: |
+          vinnie --semver --prefix=v next minor
+
+      - name: vinnie --semver --prefix=v next (patch)
+        run: |
           vinnie --semver --prefix=v next patch
