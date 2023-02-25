@@ -19,20 +19,25 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Tag with Vinnie
+      - name: Install vinnie
         run: |
           git config --global user.email "actions@sample.com"
           git config --global user.name "Sample Github Actions"
           pip install vinnie
           vinnie show-config
-          vinnie version --prefix=v
+
+
+      - name: vinnie --semver --prefix=v (major/minor/patch)
+        run: |
+          vinnie show-config
           #vinnie --semver --prefix=v major
           #vinnie --semver --prefix=v minor
           #vinnie --semver --prefix=v patch
           #git push --tags
 
-      - name: Test
+      - name: vinnie --semver --prefix=v next (major/minor/patch)
         run: |
           vinnie show-config
-          vinnie version --prefix=v
-          date
+          #vinnie --semver --prefix=v next major
+          #vinnie --semver --prefix=v next minor
+          vinnie --semver --prefix=v next patch
