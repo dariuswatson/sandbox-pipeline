@@ -25,7 +25,8 @@ jobs:
           git config --global user.name "Sample Github Actions"
           pip install vinnie
           vinnie show-config
-          vinnie --semver --prefix=v major
+          #vinnie --semver --prefix=v major
+          vinnie --semver --prefix=v minor
           git push --tags
 
       - name: Test
