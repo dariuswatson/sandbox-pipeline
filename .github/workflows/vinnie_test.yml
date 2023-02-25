@@ -45,3 +45,7 @@ jobs:
       - name: vinnie --semver --prefix=v next (patch)
         run: |
           vinnie --semver --prefix=v next patch
+
+      - name: date
+        run: |
+          date
