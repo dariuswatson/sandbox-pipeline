@@ -27,10 +27,13 @@ jobs:
           vinnie show-config
           #vinnie --semver --prefix=v major
           #vinnie --semver --prefix=v minor
-          vinnie --semver --prefix=v patch
-          git push --tags
+          #vinnie --semver --prefix=v patch
+          #git push --tags
 
       - name: Test
         run: |
-          hostname
+          vinnie version > vinnie.txt
+          export VINNIE_VERSION=`cat vinnie.txt`
+          echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
+          echo "vinnie_version=$VINNIE_VERSION"
           date
