@@ -25,10 +25,10 @@ jobs:
           git config --global user.name "Sample Github Actions"
           pip install vinnie
           vinnie show-config
-          vinnie minor > vinnie.txt
+          vinnie next minor > vinnie.txt
           export VINNIE_VERSION=`cat vinnie.txt`
           echo "This version: $VINNIE_VERSION"
-          git tag $VINNIE_VERSION
-          git push --tags
+          #git tag $VINNIE_VERSION
+          #git push --tags
 
 
