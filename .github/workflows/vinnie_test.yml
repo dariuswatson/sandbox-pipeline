@@ -29,7 +29,7 @@ jobs:
           vinnie --prefix=v version
           vinnie patch
           export VINNIE_VERSION=`cat vinnie.txt`
-          echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
+          echo "current_version=$VINNIE_VERSION" >> $GITHUB_ENV
           git tag $VINNIE_VERSION
           git push --tags
           find . -name 'vinnie.txt'
