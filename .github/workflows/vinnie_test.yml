@@ -24,9 +24,7 @@ jobs:
           git config --global user.email "actions@sample.com"
           git config --global user.name "Sample Github Actions"
           pip install vinnie
-          # vinnie --no-semver --prefix=v next bump > vinnie.txt
-          vinnie --prefix=v version > vinnie.txt
-          vinnie patch --prefix=v
+          vinnie version > vinnie.txt
           export VINNIE_VERSION=`cat vinnie.txt`
           git tag $VINNIE_VERSION
           git push --tags
