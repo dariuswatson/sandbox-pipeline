@@ -28,7 +28,7 @@ jobs:
           vinnie minor > vinnie.txt
           export VINNIE_VERSION=`cat vinnie.txt`
           echo "This version: $VINNIE_VERSION"
-          #git tag $VINNIE_VERSION
-          #git push --tags
+          git tag $VINNIE_VERSION
+          git push --tags
 
 
