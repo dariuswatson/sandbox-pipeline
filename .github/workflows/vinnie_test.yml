@@ -24,8 +24,9 @@ jobs:
           git config --global user.email "actions@sample.com"
           git config --global user.name "Sample Github Actions"
           pip install vinnie
-          # Get next version and pass along in the environment
-          vinnie --no-semver --prefix=v next bump > vinnie.txt
+          # vinnie --no-semver --prefix=v next bump > vinnie.txt
+          vinnie version
+          vinnie patch
           export VINNIE_VERSION=`cat vinnie.txt`
           echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
           git tag $VINNIE_VERSION
