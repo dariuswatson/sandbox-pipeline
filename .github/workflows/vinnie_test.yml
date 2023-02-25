@@ -25,18 +25,10 @@ jobs:
           git config --global user.name "Sample Github Actions"
           pip install vinnie
           # vinnie --no-semver --prefix=v next bump > vinnie.txt
-          vinnie version
-          vinnie --prefix=v version
-          vinnie patch
+          vinnie --prefix=v version > vinnie.txt
+          vinnie patch --prefix=v
           export VINNIE_VERSION=`cat vinnie.txt`
-          echo "current_version=$VINNIE_VERSION" >> $GITHUB_ENV
           git tag $VINNIE_VERSION
           git push --tags
-          find . -name 'vinnie.txt'
 
-      - name: Upload vinnie version artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: vinnie_version
-          path: vinnie.txt
 
