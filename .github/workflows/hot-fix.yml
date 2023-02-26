@@ -7,6 +7,13 @@ on:
         description: 'Hotfix Tag'
         required: true
         type: string
+        choice:
+          type: choice
+          description: Make a choice
+          options:
+          - foo
+          - bar
+          - baz
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,14 +30,3 @@ jobs:
           fetch-depth: 0
           ref: ${{ inputs.hotfixTag }}
 
-      - name: Create vinnie.txt
-        run: |
-          export VINNIE_VERSION=${{ inputs.hotfixTag }}
-          echo $VINNIE_VERSION > vinnie.txt
-          echo "vinnie_version=$VINNIE_VERSION" >> $GITHUB_ENV
-          find . -name 'vinnie.txt'
-      - name: Upload vinnie version artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: ${{ inputs.hotfixTag }}
-          path: vinnie.txt
