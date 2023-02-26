@@ -62,3 +62,4 @@ jobs:
       - name: date
         run: |
           date
+          whoami
