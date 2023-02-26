@@ -49,7 +49,7 @@ jobs:
 
       - name: vinnie --semver --prefix=v next (major)
         run: |
-          #vinnie --semver --prefix=v next major
+          vinnie --semver --prefix=v next major
 
       - name: vinnie --semver --prefix=v next (minor)
         run: |
