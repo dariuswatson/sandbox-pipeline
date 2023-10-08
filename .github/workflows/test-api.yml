@@ -16,3 +16,14 @@ jobs:
           API_ENDPOINT="http://api.zippopotam.us/us/80013"
           curl --location $API_ENDPOINT
 
+      - name: Test API with Token
+        run: |
+          API_ENDPOINT="https://api.openai.com/v1/models"
+          RESPONSE=$(curl "$API_ENDPOINT" -H "Authorization: Bearer $OPENAI_API_KEY" -H "OpenAI-Organization: $OPENAI_ORG")
+          if [[ "$(echo "$RESPONSE" | jq -r '.status')" == "200" ]]; then
+            echo "API Token is valid."
+          else
+            echo "API Token is invalid or the API request failed."
+            exit 1
+          fi
+
