@@ -1,0 +1,18 @@
+name: windows-pipeline
+
+on:
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use a Windows runner for PowerShell
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Run PowerShell Script
+      run: |
+        # PowerShell script to get current date and time
+        $currentDateTime = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        Write-Host "Current Date and Time: $currentDateTime"
