@@ -26,7 +26,9 @@ jobs:
       - name: Test API with Token
         run: |
           API_ENDPOINT="https://api.openai.com/v1/models"
-          RESPONSE=$(curl "$API_ENDPOINT" -H "Authorization: Bearer $OPENAI_API_KEY" -H "OpenAI-Organization: $OPENAI_ORG")
+          key="${{ OPENAI_API_KEY }}"
+          org="${{ OPENAI_ORG }}"
+          RESPONSE=$(curl "$API_ENDPOINT" -H "Authorization: Bearer $key" -H "OpenAI-Organization: $org")
           echo $RESPONSE 
           echo "#------------------- only id and model name -----------------------#"
           echo $RESPONSE | jq -r '.data[] | {id, model_name}'
