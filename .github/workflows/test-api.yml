@@ -11,6 +11,13 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Install jq
+        run: |
+          # For Ubuntu-based runners
+          sudo apt-get update -y
+          sudo apt-get install -y jq
+        shell: bash
+
       - name: Test API
         run: |
           API_ENDPOINT="http://api.zippopotam.us/us/80013"
@@ -20,7 +27,6 @@ jobs:
         run: |
           API_ENDPOINT="https://api.openai.com/v1/models"
           RESPONSE=$(curl "$API_ENDPOINT" -H "Authorization: Bearer $OPENAI_API_KEY" -H "OpenAI-Organization: $OPENAI_ORG")
+          echo $RESPONSE 
+          echo "#------------------- only id and model name -----------------------#"
           echo $RESPONSE | jq -r '.data[] | {id, model_name}'
-
-
-
