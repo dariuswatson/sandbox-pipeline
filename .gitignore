@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# secrets
+token.json
+orig-token.json
+orig-config.py
+.env
