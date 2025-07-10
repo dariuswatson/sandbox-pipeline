@@ -42,8 +42,8 @@ jobs:
       - name: Create Token File
         run: |
           echo '{
-            "access_token": "'$PAT'",
-            "refresh_token": "'$REFRESH_TOKEN'",
+            "access_token": "'${{ env.PAT }}'",
+            "refresh_token": "'${{ env.REFRESH_TOKEN }}'",
             "expires_at": "2025-07-11T00:09:33.969672"
           }' > token.json
 
