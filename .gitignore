@@ -133,3 +133,5 @@ token.json
 orig-token.json
 orig-config.py
 .env
+unsecure.*
+

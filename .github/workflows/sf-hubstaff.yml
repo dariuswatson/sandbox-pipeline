@@ -4,32 +4,37 @@ on:
   workflow_dispatch:
 
 env:
-  ORG_ID: ${{ secrets.HS_ORG_ID }}
-  ORG_NAME: '${{ secrets.HS_ORG_NAME }}'
-  PROJECT_NAME: ${{ secrets.HS_PROJECT_NAME }}
-  CLIENT_ID: ${{ secrets.HS_CLIENT_ID }}
-  CLIENT_SECRET: ${{ secrets.HS_CLIENT_SECRET }}
-  PAT: ${{ secrets.HS_PAT }}
-  REFRESH_TOKEN: ${{ secrets.HS_REFRESH_TOKEN }}
-  USERNAME: ${{ secrets.HS_USERNAME }}
-  REDIRECT_URI: ${{ secrets.HS_REDIRECT_URI }}
+  ORG_ID: ${{ secrets.ORG_ID }}
+  ORG_NAME: '${{ secrets.ORG_NAME }}'
+  PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+  CLIENT_ID: ${{ secrets.CLIENT_ID }}
+  CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+  PAT: ${{ secrets.PAT }}
+  REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+  USERNAME: ${{ secrets.USERNAME }}
+  REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
   SCOPE:  'openid hubstaff:read'
-  TOKEN_URL: 'https://account.hubstaff.com/access_tokens'
-  BASE_URL: 'https://api.hubstaff.com/v2'
-  USERS_FILE:  'hubstaff_users.csv'
-  DATA_FOLDER: 'data/'
+  TOKEN_URL: ${{ secrets.TOKEN_URL }}
+  BASE_URL: ${{ secrets.BASE_URL }}
+  USERS_FILE:  ${{ secrets.USERS_FILE }}
+  DATA_FOLDER: ${{ secrets.DATA_FOLDER }}
 
 jobs:
   test-api-token:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Install jq
+      - name: Setup Python
+        id: python-setup
         run: |
-          # For Ubuntu-based runners
           sudo apt-get update -y
-          sudo apt-get install -y jq
-        shell: bash
+          sudo apt-get install -y python3 python3-pip curl jq
+          sudo ln -sf /usr/bin/python3 /usr/bin/python
+          python --version
+          pip --version
+          pip install --upgrade pip
+          pip install requests
+

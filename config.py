@@ -6,21 +6,21 @@ load_dotenv()
 
 # === Configuration ===
 # Load from environment variables with fallbacks to GH secrets
-CLIENT_ID = os.getenv('CLIENT_ID', '${{ secrets.HS_CLIENT_ID }}')
-CLIENT_SECRET = os.getenv('CLIENT_SECRET', '${{ secrets.HS_CLIENT_SECRET }}')
-PAT = os.getenv('PAT', '${{ secrets.HS_PAT }}')
-USERNAME = os.getenv('USERNAME', '${{ secrets.HS_USERNAME }}')
-TOKEN_URL = os.getenv('TOKEN_URL', 'https://account.hubstaff.com/access_tokens')
-BASE_URL = os.getenv('BASE_URL', 'https://api.hubstaff.com/v2')
-ORG_NAME = os.getenv('ORG_NAME', '${{ secrets.HS_ORG_NAME }}')
-PROJECT_NAME = os.getenv('PROJECT_NAME', '${{ secrets.HS_PROJECT_NAME }}')
-USERS_FILE = os.getenv('USERS_FILE', 'hubstaff_users.csv')
-DATA_FOLDER = os.getenv('DATA_FOLDER', 'data/')
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+PAT = os.getenv('PAT')
+USERNAME = os.getenv('USERNAME')
+TOKEN_URL = os.getenv('TOKEN_URL')
+BASE_URL = os.getenv('BASE_URL')
+ORG_NAME = os.getenv('ORG_NAME')
+PROJECT_NAME = os.getenv('PROJECT_NAME')
+USERS_FILE = os.getenv('USERS_FILE')
+DATA_FOLDER = os.getenv('DATA_FOLDER')
 
 # these values could change or are dynamically determined
-REFRESH_TOKEN = os.getenv('REFRESH_TOKEN', '${{ secrets.HS_REFRESH_TOKEN }}')
-ORG_ID = '${{ secrets.HS_ORG_ID }}'
+REFRESH_TOKEN = os.getenv('REFRESH_TOKEN')
+ORG_ID = 'ORG_ID'
 
 # OAuth Configuration
-REDIRECT_URI = os.getenv('REDIRECT_URI', '${{ secrets.HS_REDIRECT_URI }}')
+REDIRECT_URI = os.getenv('REDIRECT_URI')
 SCOPE = os.getenv('SCOPE', 'openid hubstaff:read')
