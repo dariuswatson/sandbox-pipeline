@@ -5,11 +5,12 @@ on:
 
 env:
   ORG_ID: ${{ secrets.ORG_ID }}
-  ORG_NAME: '${{ secrets.ORG_NAME }}'
+  ORG_NAME: ${{ secrets.ORG_NAME }}
   PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
   CLIENT_ID: ${{ secrets.CLIENT_ID }}
   CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
   PAT: ${{ secrets.PAT }}
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
   REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
   USERNAME: ${{ secrets.USERNAME }}
   REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
@@ -42,7 +43,7 @@ jobs:
       - name: Create Token File
         run: |
           echo '{
-            "access_token": "'${{ env.PAT }}'",
+            "access_token": "'${{ env.ACCESS_TOKEN }}'",
             "refresh_token": "'${{ env.REFRESH_TOKEN }}'",
             "expires_at": "2025-07-11T00:09:33.969672"
           }' > token.json
